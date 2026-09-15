@@ -19,7 +19,7 @@ export type ContactFormResult =
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validate(input: ContactFormInput): string | null {
-  if (input.honeypot) {
+  if (input.honeypot?.trim()) {
     return "No se pudo enviar el formulario.";
   }
   if (!input.name.trim()) {
@@ -48,15 +48,20 @@ export async function sendContactForm(
     return { ok: false, error: validationError };
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
 
   if (!apiKey || !fromEmail) {
+    console.error("[sendContactForm] Missing RESEND_API_KEY or RESEND_FROM_EMAIL");
     return {
       ok: false,
       error: "El servicio de correo no está configurado. Inténtalo más tarde.",
     };
   }
+
+  const from = fromEmail.includes("<")
+    ? fromEmail
+    : `Círculo Musical de Sevilla <${fromEmail}>`;
 
   const resend = new Resend(apiKey);
   const subject = `[Círculo Musical de Sevilla] - ${input.pageTitle.trim()}`;
@@ -70,7 +75,7 @@ export async function sendContactForm(
   ].join("\n");
 
   const { error } = await resend.emails.send({
-    from: fromEmail,
+    from,
     to: VENUE.email,
     replyTo: input.email.trim(),
     subject,
@@ -78,6 +83,7 @@ export async function sendContactForm(
   });
 
   if (error) {
+    console.error("[sendContactForm] Resend error:", error);
     return {
       ok: false,
       error: "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",

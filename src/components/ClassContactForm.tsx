@@ -13,7 +13,6 @@ export function ClassContactForm({ pageTitle }: ClassContactFormProps) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{
     type: "success" | "error";
@@ -24,6 +23,9 @@ export function ClassContactForm({ pageTitle }: ClassContactFormProps) {
     event.preventDefault();
     setFeedback(null);
     setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const honeypot = formData.get("_confirm")?.toString() ?? "";
 
     const result = await sendContactForm({
       name,
@@ -52,17 +54,18 @@ export function ClassContactForm({ pageTitle }: ClassContactFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div className="sr-only" aria-hidden>
-        <input
-          type="text"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-          value={honeypot}
-          onChange={(event) => setHoneypot(event.target.value)}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="relative flex flex-col gap-4">
+      <input
+        type="text"
+        name="_confirm"
+        tabIndex={-1}
+        autoComplete="off"
+        defaultValue=""
+        aria-hidden
+        className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
+        data-1p-ignore
+        data-lpignore="true"
+      />
 
       <Input
         isRequired
