@@ -39,6 +39,25 @@ export const CLASES: Clase[] = [
     ]
   },
   {
+    title: "Clases de Música para bebés",
+    href: "/clases/clases-musica-bebes-sevilla",
+    image: "/images/bebes.webp",
+    content: [
+      { type: "paragraph", text: "En nuestra escuela ofrecemos clases de música en Sevilla pensadas para que los más pequeños comiencen a descubrir la música desde sus primeros meses de vida, siempre acompañados por sus padres. Nuestro objetivo es crear un espacio cálido, seguro y lleno de estímulos donde bebés y familias puedan compartir, disfrutar y conectar a través de la música y el movimiento." },
+      { type: "paragraph", text: "Nuestras clases de Música y Movimiento en Sevilla están dirigidas a bebés de 12 a 32 meses y se imparten en grupos reducidos. Este formato permite una atención cercana y personalizada, respetando los tiempos de cada niño y favoreciendo un ambiente tranquilo donde puedan explorar con libertad. La presencia de los padres es fundamental, ya que refuerza el vínculo afectivo y convierte cada sesión en una experiencia compartida única." },
+      { type: "paragraph", text: "Durante las sesiones, los bebés experimentan con sonidos, ritmos y movimientos a través de juegos musicales, canciones, dinámicas corporales y el uso de pequeños instrumentos adaptados a su edad. Se trabaja de forma natural la psicomotricidad, la coordinación, la escucha activa y la percepción auditiva, estimulando su desarrollo global mientras disfrutan." },
+      { type: "paragraph", text: "También se fomenta la interacción social, la imitación y la expresión emocional, aspectos clave en esta etapa. Todo ello se realiza desde un enfoque respetuoso, sin exigencias, permitiendo que cada bebé participe según su momento evolutivo." },
+      { type: "image", src: "/images/clases/bebes.webp", alt: "Clases de Música para bebés en Sevilla" },
+      { type: "heading", level: 3, text: "Aprender música en Sevilla en un entorno profesional y motivador" },
+      { type: "paragraph", text: "Nuestra profesora, especializada en educación musical temprana, acompaña cada sesión con sensibilidad, experiencia y una profunda vocación. Su manera de guiar hace que tanto bebés como padres se sientan cómodos, creando un entorno de confianza donde la música fluye de forma natural." },
+      { type: "paragraph", text: "En nuestras clases, la música no solo se aprende: se vive, se siente y se comparte. Es un primer contacto lleno de emoción que sienta las bases para un desarrollo musical y personal saludable, siempre desde el juego, el cariño y la conexión." },
+      { type: "heading", level: 3, text: "Da el primer paso y pregúntanos sin compromiso" },
+      { type: "paragraph", text: "Si estás buscando clases de música en Sevilla para tu bebé y te gustaría ofrecerle una experiencia enriquecedora desde sus primeros años, te invitamos a dar el primer paso y ponerte en contacto con nosotros. Nuestras clases de Música y Movimiento en Sevilla son una oportunidad maravillosa para compartir tiempo de calidad, estimular su desarrollo y crear recuerdos únicos a través de la música." },
+      { type: "paragraph", text: "Puedes preguntarnos sin ningún tipo de compromiso por nuestra clase de prueba: es la mejor manera de conocer el ambiente, ver cómo trabajamos y vivir en primera persona una sesión junto a tu pequeño. Estaremos encantados de acompañaros desde el inicio y ayudaros a descubrir todo lo que la música puede aportar en esta etapa tan especial." },
+      { type: "paragraph", text: "A veces, una simple decisión abre un mundo de posibilidades… y este puede ser el comienzo de un precioso camino en la música, vivido en familia. Estamos aquí para vosotros cuando queráis empezar." }
+    ]
+  },
+  {
     title: "Lenguaje musical",
     href: "/clases/clases-lenguaje-musical-sevilla",
     image: "/images/lenguaje.jpg",

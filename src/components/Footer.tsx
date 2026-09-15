@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { VENUE } from "@/data/venue";
+import { SocialLinks } from "@/components/SocialLinks";
+import { VenueMapsLink } from "@/components/VenueMapsLink";
 
 export function Footer() {
   return (
@@ -10,7 +13,10 @@ export function Footer() {
               Horario
             </h3>
             <p className="mt-2 text-sm text-default-700">
-              Consultar horario
+              {VENUE.schedule.weekdays}
+            </p>
+            <p className="mt-1 text-sm text-default-700">
+              {VENUE.schedule.friday}
             </p>
           </div>
           <div>
@@ -18,7 +24,7 @@ export function Footer() {
               Dirección
             </h3>
             <p className="mt-2 text-sm text-default-700">
-              Sevilla
+              <VenueMapsLink className="text-default-700 hover:text-primary hover:underline" />
             </p>
           </div>
           <div>
@@ -27,30 +33,28 @@ export function Footer() {
             </h3>
             <p className="mt-2 text-sm text-default-700">
               <a
-                href="mailto:circulomusicaldesevilla@gmail.com"
+                href={`mailto:${VENUE.email}`}
                 className="text-primary hover:underline"
               >
-                circulomusicaldesevilla@gmail.com
+                {VENUE.email}
               </a>
             </p>
             <p className="mt-1 text-sm text-default-700">
-              691196341 / 630876239
+              {VENUE.phones.map((phone, index) => (
+                <span key={phone.href}>
+                  {index > 0 && " / "}
+                  <a href={phone.href} className="hover:text-primary hover:underline">
+                    {phone.display}
+                  </a>
+                </span>
+              ))}
             </p>
           </div>
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-default-600">
               Redes sociales
             </h3>
-            <p className="mt-2 text-sm text-default-700">
-              <a
-                href="https://www.instagram.com/circulomusicaldesevilla"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Instagram
-              </a>
-            </p>
+            <SocialLinks className="mt-2" />
           </div>
         </div>
         <hr className="my-8 border-default-200" />

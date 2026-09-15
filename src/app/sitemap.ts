@@ -17,5 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
-  return [home, ...classPages];
+  const contactPage = {
+    url: `${SITE_URL}/acerca-de`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  };
+  return [home, contactPage, ...classPages];
 }

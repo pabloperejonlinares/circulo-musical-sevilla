@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import type { HTMLMotionProps } from "framer-motion";
 
 const EMAIL = "circulomusicaldesevilla@gmail.com";
 const PHONES = "691 196 341 / 630 876 239";
@@ -48,6 +49,7 @@ export function Header({ clases }: HeaderProps) {
 
   const handleSelectionChange = (value: string | undefined) => {
     if (value) {
+      closeMenu();
       router.push(value);
     }
   };
@@ -70,6 +72,20 @@ export function Header({ clases }: HeaderProps) {
     </ul>
   );
 
+  /** HeroUI anima el menú móvil a `calc(100vh - navbar)`; lo sustituimos por altura al contenido. */
+  const mobileMenuMotionProps = {
+    variants: {
+      enter: {
+        height: "auto",
+        transition: { duration: 0.3, ease: "easeOut" as const },
+      },
+      exit: {
+        height: 0,
+        transition: { duration: 0.25, ease: "easeIn" as const },
+      },
+    },
+  } satisfies Omit<HTMLMotionProps<"ul">, "ref">;
+
   const selectAndButton = (
     <>
       <Select className="w-full sm:max-w-xs" label="Clases de música" onSelectionChange={(keys) => handleSelectionChange(keys.currentKey)}>
@@ -90,6 +106,7 @@ export function Header({ clases }: HeaderProps) {
       className="h-16 sm:h-20"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      shouldBlockScroll={false}
     >
       <NavbarContent justify="center" className="gap-2 sm:gap-3">
         <NavbarMenuToggle className="sm:hidden" aria-label="Abrir menú" />
@@ -102,8 +119,11 @@ export function Header({ clases }: HeaderProps) {
         {selectAndButton}
       </NavbarContent>
 
-      {/* Mobile: menú desplegable */}
-      <NavbarMenu className="pt-6 gap-4 px-6">
+      {/* Mobile: menú desplegable (altura al contenido vía motionProps) */}
+      <NavbarMenu
+        className="bottom-auto h-fit min-h-0 gap-4 px-6 pb-5 pt-4"
+        motionProps={mobileMenuMotionProps}
+      >
         <NavbarMenuItem onClick={closeMenu}>{contactBlock}</NavbarMenuItem>
         <NavbarMenuItem className="flex flex-col gap-3 w-full">
           {selectAndButton}
