@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 import { CLASES } from "@/data";
+import { ClassContactForm } from "@/components/ClassContactForm";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -39,7 +40,14 @@ export default async function ClasePage({ params }: Props) {
       <h1 className="text-4xl md:text-5xl font-bold mb-8">
         {clase.title}
       </h1>
-      
+
+      <section className="mb-10 rounded-xl border border-default-200 bg-default-50 p-6">
+        <h2 className="mb-6 text-2xl font-semibold text-foreground">
+          ¿Te interesa? Rellena este formulario y contactaremos contigo
+        </h2>
+        <ClassContactForm pageTitle={clase.title} />
+      </section>
+
       <div className="flex flex-col gap-6 text-lg text-default-700">
         {clase.content.map((block, index) => {
           switch (block.type) {
