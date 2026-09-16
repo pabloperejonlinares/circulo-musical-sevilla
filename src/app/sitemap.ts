@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { CLASES } from "@/data";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tu-dominio.com";
+import { getSiteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const SITE_URL = getSiteUrl();
   const now = new Date();
   const home = {
     url: SITE_URL,

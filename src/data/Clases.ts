@@ -6,6 +6,7 @@ export type ContentBlock =
 
 export type Clase = {
   title: string;
+  description: string;
   href: string;
   image: string;
   content: ContentBlock[];
@@ -14,6 +15,8 @@ export type Clase = {
 export const CLASES: Clase[] = [
   {
     title: "Clases para niños (+3 años)",
+    description:
+      "Clases de música para niños en Sevilla a partir de 3 años. Grupos reducidos, metodología lúdica y primera clase de prueba sin compromiso.",
     href: "/clases/clases-musica-niños-sevilla",
     image: "/images/clase-niños.jpg",
     content: [
@@ -40,6 +43,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Clases de Música para bebés",
+    description:
+      "Clases de música para bebés en Sevilla (12-32 meses). Música y movimiento en grupos reducidos con padres. Primera clase de prueba sin compromiso.",
     href: "/clases/clases-musica-bebes-sevilla",
     image: "/images/bebes.webp",
     content: [
@@ -59,6 +64,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Lenguaje musical",
+    description:
+      "Clases de lenguaje musical en Sevilla para todos los niveles. Ritmo, teoría, dictado y preparación para conservatorio. Clase de prueba gratuita.",
     href: "/clases/clases-lenguaje-musical-sevilla",
     image: "/images/lenguaje.jpg",
     content: [
@@ -75,6 +82,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Armonía musical",
+    description:
+      "Clases de armonía musical en Sevilla. Acordes, progresiones y análisis con metodología clara. Preparación para conservatorio. Prueba sin compromiso.",
     href: "/clases/clases-armonia-musical-sevilla",
     image: "/images/armonia.jpg",
     content: [
@@ -91,6 +100,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Violín",
+    description:
+      "Clases de violín en Sevilla para todos los niveles y edades. Profesora titulada, metodología personalizada y repertorio adaptado. Clase de prueba gratis.",
     href: "/clases/clases-violin-sevilla",
     image: "/images/violin.jpg",
     content: [
@@ -110,6 +121,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Piano",
+    description:
+      "Clases de piano en Sevilla para niños y adultos. Técnica, lectura y expresión con profesor titulado. Primera clase de prueba sin compromiso.",
     href: "/clases/clases-piano-sevilla",
     image: "/images/piano.jpg",
     content: [
@@ -127,6 +140,8 @@ export const CLASES: Clase[] = [
   },
   {
     title: "Otros instrumentos",
+    description:
+      "Clases de otros instrumentos en Sevilla adaptadas a tu nivel y objetivos. Profesores titulados y aprendizaje personalizado. Pregunta sin compromiso.",
     href: "/clases/clases-otros-instrumentos-sevilla",
     image: "/images/otros.jpg",
     content: [

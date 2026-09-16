@@ -16,7 +16,7 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { HTMLMotionProps } from "framer-motion";
 
 const EMAIL = "circulomusicaldesevilla@gmail.com";
@@ -44,6 +44,10 @@ type HeaderProps = {
 export function Header({ clases }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const heroTitleClass =
+    "text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl";
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -144,12 +148,20 @@ export function Header({ clases }: HeaderProps) {
         <div className="absolute inset-0 h-full w-full bg-black/55" aria-hidden />
       </div>
       <div className="relative z-10 flex max-w-4xl flex-col gap-4 text-white">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-          Círculo Musical de Sevilla
-        </h1>
-        <p className="text-2xl font-bold sm:text-2xl">
-          Tu escuela de música en Sevilla
-        </p>
+        {isHome ? (
+          <h1 className={heroTitleClass}>Círculo Musical de Sevilla</h1>
+        ) : (
+          <p className={heroTitleClass}>Círculo Musical de Sevilla</p>
+        )}
+        {isHome ? (
+          <h2 className="text-2xl font-bold sm:text-2xl">
+            Tu escuela de música en Sevilla
+          </h2>
+        ) : (
+          <p className="text-2xl font-bold sm:text-2xl">
+            Tu escuela de música en Sevilla
+          </p>
+        )}
         <p className="text-4xl font-medium">
           ¡Primera clase de prueba sin compromiso!
         </p>

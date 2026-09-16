@@ -1,24 +1,36 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 import { CLASES } from "@/data";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClassContactForm } from "@/components/ClassContactForm";
+import { JsonLd } from "@/components/JsonLd";
+import { getClaseBySlug } from "@/lib/seo/clases";
+import {
+  buildBreadcrumbJsonLd,
+  buildCourseJsonLd,
+} from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const clase = CLASES.find((c) => c.href === `/clases/${slug}`);
+  const clase = getClaseBySlug(slug);
 
   if (!clase) {
     return { title: "Clase no encontrada" };
   }
 
-  return {
-    title: `${clase.title} | Círculo Musical de Sevilla`,
-  };
+  return buildPageMetadata({
+    title: clase.title,
+    description: clase.description,
+    path: clase.href,
+    image: clase.image,
+  });
 }
 
 export async function generateStaticParams() {
@@ -29,17 +41,32 @@ export async function generateStaticParams() {
 
 export default async function ClasePage({ params }: Props) {
   const { slug } = await params;
-  const clase = CLASES.find((c) => c.href === `/clases/${slug}`);
+  const clase = getClaseBySlug(slug);
 
   if (!clase) {
     notFound();
   }
 
+  const breadcrumbItems = [
+    { name: "Inicio", path: "/" },
+    { name: "Clases", path: "/#clases" },
+    { name: clase.title, path: clase.href },
+  ];
+
   return (
-    <main className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8">
-        {clase.title}
-      </h1>
+    <article className="container mx-auto px-4 py-12 max-w-4xl">
+      <JsonLd data={buildCourseJsonLd(clase)} />
+      <JsonLd data={buildBreadcrumbJsonLd(breadcrumbItems)} />
+
+      <Breadcrumbs
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Clases", href: "/#clases" },
+          { label: clase.title },
+        ]}
+      />
+
+      <h1 className="text-4xl md:text-5xl font-bold mb-8">{clase.title}</h1>
 
       <section className="mb-10 rounded-xl border border-default-200 bg-default-50 p-6">
         <h2 className="mb-6 text-2xl font-semibold text-foreground">
@@ -60,8 +87,8 @@ export default async function ClasePage({ params }: Props) {
             case "heading": {
               const HeadingTag = `h${block.level}` as keyof React.JSX.IntrinsicElements;
               return (
-                <HeadingTag 
-                  key={index} 
+                <HeadingTag
+                  key={index}
                   className={`font-bold mt-6 ${
                     block.level === 3 ? "text-2xl" : "text-xl"
                   }`}
@@ -80,12 +107,15 @@ export default async function ClasePage({ params }: Props) {
               );
             case "image":
               return (
-                <div key={index} className="my-8 w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg">
-                  <Image 
-                    src={block.src} 
-                    alt={block.alt} 
-                    width={800} 
-                    height={500} 
+                <div
+                  key={index}
+                  className="my-8 w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg"
+                >
+                  <Image
+                    src={block.src}
+                    alt={block.alt}
+                    width={800}
+                    height={500}
                     className="w-full h-auto object-cover"
                   />
                 </div>
@@ -95,6 +125,6 @@ export default async function ClasePage({ params }: Props) {
           }
         })}
       </div>
-    </main>
+    </article>
   );
 }

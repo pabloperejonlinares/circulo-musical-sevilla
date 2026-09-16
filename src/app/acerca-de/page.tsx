@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { CLASES } from "@/data";
 import { VENUE } from "@/data/venue";
 import { SocialLinks } from "@/components/SocialLinks";
 import { VenueMapsLink } from "@/components/VenueMapsLink";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Contacto | Círculo Musical de Sevilla",
+export const metadata = buildPageMetadata({
+  title: "Contacto",
   description:
     "Contacta con Círculo Musical de Sevilla. Escuela de música en Sevilla con clases para todas las edades. Primera clase de prueba sin compromiso.",
-};
+  path: "/acerca-de",
+});
 
 export default function AcercaDePage() {
   return (
