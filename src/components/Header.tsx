@@ -5,7 +5,6 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
@@ -24,13 +23,13 @@ const PHONES = "691 196 341 / 630 876 239";
 
 export const CirculoMusicalLogo = () => {
   return (
-    <div className="relative h-12 w-[180px] sm:h-20 sm:w-[250px]">
+    <div className="relative h-12 w-[100px] sm:h-20 sm:w-[250px]">
       <Image
         src="/images/logo.png"
         alt="Círculo Musical de Sevilla"
         fill
         className="object-contain object-left"
-        sizes="(max-width: 640px) 180px, 250px"
+        sizes="(max-width: 640px) 100px, 250px"
         priority
       />
     </div>
@@ -59,19 +58,21 @@ export function Header({ clases }: HeaderProps) {
   };
 
   const contactBlock = (
-    <ul className="flex flex-col gap-1 items-start list-disc pl-4">
-      <li>
+    <ul className="flex min-w-0 flex-col items-start gap-0.5 list-disc pl-3 sm:gap-1 sm:pl-4">
+      <li className="min-w-0">
         <HeroUILink
           as={Link}
           href={`mailto:${EMAIL}`}
           size="sm"
-          className="text-default-600 hover:text-foreground"
+          className="break-all text-[10px] leading-tight text-default-600 hover:text-foreground sm:break-normal sm:text-sm"
         >
           {EMAIL}
         </HeroUILink>
       </li>
       <li>
-        <span className="text-sm text-default-600">{PHONES}</span>
+        <span className="text-[10px] leading-tight text-default-600 sm:whitespace-nowrap sm:text-sm">
+          {PHONES}
+        </span>
       </li>
     </ul>
   );
@@ -107,17 +108,19 @@ export function Header({ clases }: HeaderProps) {
     <> 
     <Navbar
       maxWidth="full"
-      className="h-16 sm:h-20"
+      className="h-auto min-h-16 py-1 sm:h-20 sm:py-0"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       shouldBlockScroll={false}
     >
-      <NavbarContent justify="center" className="gap-2 sm:gap-3">
-        <NavbarMenuToggle className="sm:hidden" aria-label="Abrir menú" />
-        <NavbarBrand as={Link} href="/" className="gap-2 shrink-0">
-          <CirculoMusicalLogo />
-        </NavbarBrand>
-        <NavbarItem className="hidden sm:block">{contactBlock}</NavbarItem>
+      <NavbarContent justify="center" className="min-w-0 gap-2 sm:gap-3">
+        <NavbarMenuToggle className="shrink-0 sm:hidden" aria-label="Abrir menú" />
+        <div className="flex min-w-0 max-w-[calc(100vw-4.5rem)] items-center gap-2 sm:max-w-none sm:gap-3">
+          <NavbarBrand as={Link} href="/" className="!grow-0 !basis-auto shrink-0">
+            <CirculoMusicalLogo />
+          </NavbarBrand>
+          <div className="min-w-0 shrink">{contactBlock}</div>
+        </div>
       </NavbarContent>
       <NavbarContent justify="end" className="hidden sm:flex gap-4">
         {selectAndButton}
@@ -128,8 +131,7 @@ export function Header({ clases }: HeaderProps) {
         className="bottom-auto h-fit min-h-0 gap-4 px-6 pb-5 pt-4"
         motionProps={mobileMenuMotionProps}
       >
-        <NavbarMenuItem onClick={closeMenu}>{contactBlock}</NavbarMenuItem>
-        <NavbarMenuItem className="flex flex-col gap-3 w-full">
+        <NavbarMenuItem className="flex w-full flex-col gap-3">
           {selectAndButton}
         </NavbarMenuItem>
       </NavbarMenu>
