@@ -33,13 +33,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export async function generateStaticParams() {
+export  function generateStaticParams() {
   return CLASES.map((clase) => ({
     slug: clase.href.replace("/clases/", ""),
   }));
 }
 
-export default async function ClasePage({ params }: Props) {
+export default async function ClasePage({ params }: Readonly<Props>) {
   const { slug } = await params;
   const clase = getClaseBySlug(slug);
 
